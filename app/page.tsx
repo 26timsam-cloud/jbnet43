@@ -1,0 +1,23 @@
+import { Header } from "@/components/landing/header"
+import { Hero } from "@/components/landing/hero"
+import { Services } from "@/components/landing/services"
+import { About } from "@/components/landing/about"
+import { QuoteForm } from "@/components/landing/quote-form"
+import { Contact } from "@/components/landing/contact"
+import { Footer } from "@/components/landing/footer"
+
+export default function LandingPage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1">
+        <Hero />
+        <Services />
+        <About />
+        <QuoteForm />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  )
+}
