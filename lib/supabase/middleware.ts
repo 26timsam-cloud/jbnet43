@@ -22,30 +22,46 @@ export async function updateSession(request: NextRequest) {
   )
 
   const { data: { user } } = await supabase.auth.getUser()
+  const url = request.nextUrl.clone()
 
-  if (user) {
-    // 1. On récupère le rôle réel
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', user.id)
-      .single()
+  const isProtectedDashboard = url.pathname.startsWith('/dashboard')
+  const isProtectedAdmin = url.pathname.startsWith('/admin')
+  const isAuthPage = url.pathname.startsWith('/auth')
 
-    const url = request.nextUrl.clone()
-
-    // 2. FORCE LA REDIRECTION ADMIN
-    // Si tu es admin et que tu n'es pas déjà sur une page /admin
-    if (profile?.role === 'admin' && !url.pathname.startsWith('/admin')) {
-      url.pathname = '/admin'
+  // 1. Utilisateur non connecté → protéger les routes privées
+  if (!user) {
+    if (isProtectedDashboard || isProtectedAdmin) {
+      url.pathname = '/auth/login'
       return NextResponse.redirect(url)
     }
+    return supabaseResponse
+  }
 
-    // 3. PROTECTION CLIENT
-    // Si tu es client et que tu tentes d'aller en admin
-    if (profile?.role === 'client' && url.pathname.startsWith('/admin')) {
-      url.pathname = '/dashboard'
-      return NextResponse.redirect(url)
-    }
+  // 2. Utilisateur connecté → récupérer le rôle
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+
+  const role = profile?.role
+
+  // 3. Utilisateur connecté qui visite une page d'auth → rediriger vers son espace
+  if (isAuthPage) {
+    url.pathname = role === 'admin' ? '/admin' : '/dashboard'
+    return NextResponse.redirect(url)
+  }
+
+  // 4. Admin qui tente d'accéder au dashboard client → rediriger vers /admin
+  if (role === 'admin' && isProtectedDashboard) {
+    url.pathname = '/admin'
+    return NextResponse.redirect(url)
+  }
+
+  // 5. Client qui tente d'accéder à l'espace admin → rediriger vers /dashboard
+  if (role !== 'admin' && isProtectedAdmin) {
+    url.pathname = '/dashboard'
+    return NextResponse.redirect(url)
   }
 
   return supabaseResponse
