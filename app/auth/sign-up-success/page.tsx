@@ -5,8 +5,7 @@ import { Mail, CheckCircle } from "lucide-react"
 
 export default function SignUpSuccessPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-secondary/30 px-4">
-      <Card className="w-full max-w-md text-center">
+    <Card className="w-full shadow-lg text-center">
         <CardHeader>
           <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-accent/10 text-accent">
             <CheckCircle className="h-8 w-8" />
@@ -41,7 +40,6 @@ export default function SignUpSuccessPage() {
             </Link>
           </div>
         </CardContent>
-      </Card>
-    </div>
+    </Card>
   )
 }

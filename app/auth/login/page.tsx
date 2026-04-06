@@ -58,14 +58,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container flex min-h-screen w-full flex-col items-center justify-center px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl text-center">Connexion</CardTitle>
-          <CardDescription className="text-center">
-            Connectez-vous à votre compte JBNet43
-          </CardDescription>
-        </CardHeader>
+    <Card className="w-full shadow-lg">
+      <CardHeader className="space-y-1 text-center">
+        <CardTitle className="text-2xl">Connexion</CardTitle>
+        <CardDescription>
+          Connectez-vous à votre compte JBNet43
+        </CardDescription>
+      </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
@@ -113,7 +112,6 @@ export default function LoginPage() {
             </Link>
           </div>
         </CardContent>
-      </Card>
-    </div>
+    </Card>
   )
 }

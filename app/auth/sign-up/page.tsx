@@ -60,17 +60,13 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-secondary/30 px-4 py-8">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <Link href="/" className="text-2xl font-bold text-primary mb-2 inline-block">
-            JBNet43
-          </Link>
-          <CardTitle className="text-2xl">Créer un compte</CardTitle>
-          <CardDescription>
-            Inscrivez-vous pour accéder à votre espace client
-          </CardDescription>
-        </CardHeader>
+    <Card className="w-full shadow-lg">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">Créer un compte</CardTitle>
+        <CardDescription>
+          Inscrivez-vous pour accéder à votre espace client
+        </CardDescription>
+      </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
@@ -150,7 +146,6 @@ export default function SignUpPage() {
             </Link>
           </div>
         </CardContent>
-      </Card>
-    </div>
+    </Card>
   )
 }
