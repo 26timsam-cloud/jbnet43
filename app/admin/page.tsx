@@ -38,7 +38,7 @@ export default async function AdminDashboardPage() {
   const { count: newQuotes } = await supabase
     .from("quote_requests")
     .select("*", { count: "exact", head: true })
-    .eq("status", "pending")
+    .eq("status", "new")
 
   const { count: pendingInvoices } = await supabase
     .from("invoices")
@@ -52,18 +52,14 @@ export default async function AdminDashboardPage() {
     .select(`
       *,
       services (name),
-      profiles (first_name, last_name, email)
+      profiles (full_name, email)
     `)
     .order("created_at", { ascending: false })
     .limit(5)
 
   const { data: recentQuotes } = await supabase
     .from("quote_requests")
-    .select(`
-      *,
-      services (name),
-      profiles (first_name, last_name)
-    `)
+    .select("*")
     .order("created_at", { ascending: false })
     .limit(5)
 
@@ -82,9 +78,9 @@ export default async function AdminDashboardPage() {
           <h1 className="text-3xl font-bold text-foreground">Tableau de bord Admin</h1>
           <p className="text-muted-foreground">Bienvenue Jules, voici l&apos;état de JBNet43</p>
         </div>
-        <Link href="/admin/appointments/new">
+        <Link href="/admin/appointments">
           <Button className="flex gap-2">
-            <Plus className="h-4 w-4" /> Créer un RDV manuel
+            <Plus className="h-4 w-4" /> Voir les RDV
           </Button>
         </Link>
       </div>
@@ -129,7 +125,7 @@ export default async function AdminDashboardPage() {
                   <div key={apt.id} className="flex items-center justify-between border-b border-border pb-4 last:border-0 last:pb-0 hover:bg-muted/50 p-2 rounded-lg transition-colors">
                     <div>
                       <p className="font-semibold text-foreground">
-                        {apt.profiles?.first_name} {apt.profiles?.last_name}
+                        {apt.profiles?.full_name || apt.profiles?.email}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {apt.services?.name} — {new Date(apt.scheduled_date).toLocaleDateString("fr-FR")} à {apt.scheduled_time}
@@ -166,17 +162,23 @@ export default async function AdminDashboardPage() {
                   <div key={quote.id} className="flex items-center justify-between border-b border-border pb-4 last:border-0 last:pb-0">
                     <div>
                       <p className="font-medium text-foreground">
-                        {quote.profiles?.first_name} {quote.profiles?.last_name}
+                        {quote.name || "—"}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        Service : {quote.services?.name}
+                        {quote.service_category || quote.description?.slice(0, 40)}
                       </p>
                     </div>
-                    <span className={`text-xs font-medium px-2 py-1 rounded-full ${quote.status === "pending" ? "bg-blue-100 text-blue-800" :
-                        quote.status === "accepted" ? "bg-green-100 text-green-800" :
-                          "bg-yellow-100 text-yellow-800"
-                      }`}>
-                      {quote.status === "pending" ? "Nouveau" : quote.status}
+                    <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                      quote.status === "new" ? "bg-blue-100 text-blue-800" :
+                      quote.status === "accepted" ? "bg-green-100 text-green-800" :
+                      quote.status === "rejected" ? "bg-red-100 text-red-800" :
+                      "bg-yellow-100 text-yellow-800"
+                    }`}>
+                      {quote.status === "new" ? "Nouveau" :
+                       quote.status === "contacted" ? "Contacté" :
+                       quote.status === "quoted" ? "Devisé" :
+                       quote.status === "accepted" ? "Accepté" :
+                       quote.status === "rejected" ? "Refusé" : quote.status}
                     </span>
                   </div>
                 ))}

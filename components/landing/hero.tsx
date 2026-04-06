@@ -47,13 +47,13 @@ export function Hero() {
           </div>
           
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#devis">
-              <Button size="lg" className="min-w-[200px]">
+            <a href="#devis" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:min-w-[200px]">
                 Demander un devis gratuit
               </Button>
             </a>
-            <Link href="/auth/sign-up">
-              <Button variant="outline" size="lg" className="min-w-[200px]">
+            <Link href="/auth/sign-up" className="w-full sm:w-auto">
+              <Button variant="outline" size="lg" className="w-full sm:min-w-[200px]">
                 Créer un compte client
               </Button>
             </Link>

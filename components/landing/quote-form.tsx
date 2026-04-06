@@ -31,11 +31,12 @@ export function QuoteForm() {
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
+      phone: formData.get("phone") as string || null,
       service_category: formData.get("service_category") as string,
       description: formData.get("description") as string,
-      address: formData.get("address") as string,
+      address: formData.get("address") as string || null,
       preferred_date: formData.get("preferred_date") as string || null,
+      status: "new",
     }
 
     const supabase = createClient()
