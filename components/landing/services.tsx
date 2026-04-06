@@ -52,7 +52,7 @@ export function Services() {
               className={`card-shine group hover:shadow-xl transition-all duration-300 border-border hover:-translate-y-1 animate-fade-up overflow-hidden ${service.delay}`}
             >
               {/* Image */}
-              <div className="relative h-44 w-full overflow-hidden">
+              <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -60,9 +60,11 @@ export function Services() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
+                {/* Dégradé bas pour transition douce vers la carte */}
+                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-card to-transparent" />
               </div>
 
-              <CardHeader>
+              <CardHeader className="pt-4">
                 <CardTitle className="text-xl">{service.title}</CardTitle>
                 <CardDescription className="text-muted-foreground">
                   {service.description}
