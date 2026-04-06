@@ -28,6 +28,7 @@ export async function updateSession(request: NextRequest) {
   const isProtectedDashboard = url.pathname.startsWith('/dashboard')
   const isProtectedAdmin = url.pathname.startsWith('/admin')
   const isAuthPage = url.pathname.startsWith('/auth')
+  const needsRoleCheck = isProtectedDashboard || isProtectedAdmin || isAuthPage
 
   // 1. Utilisateur non connecté → protéger les routes privées
   if (!user) {
@@ -38,37 +39,37 @@ export async function updateSession(request: NextRequest) {
     return supabaseResponse
   }
 
-  // 2. Utilisateur connecté → récupérer le rôle via le service client (bypass RLS)
+  // 2. Route publique + utilisateur connecté → pas besoin de vérifier le rôle
+  if (!needsRoleCheck) {
+    return supabaseResponse
+  }
+
+  // 3. Vérification du rôle uniquement sur les routes protégées (bypass RLS)
   const serviceClient = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   )
-  const { data: profile, error: profileError } = await serviceClient
+  const { data: profile } = await serviceClient
     .from('profiles')
     .select('role')
     .eq('id', user.id)
     .single()
 
-  if (profileError) {
-    console.error('[Middleware] Profile query error:', profileError)
-  }
-  console.log('[Middleware] user.id:', user.id, '| role:', profile?.role)
-
   const role = profile?.role
 
-  // 3. Utilisateur connecté qui visite une page d'auth → rediriger vers son espace
+  // 4. Utilisateur connecté qui visite une page d'auth → rediriger vers son espace
   if (isAuthPage) {
     url.pathname = role === 'admin' ? '/admin' : '/dashboard'
     return NextResponse.redirect(url)
   }
 
-  // 4. Admin qui tente d'accéder au dashboard client → rediriger vers /admin
+  // 5. Admin qui tente d'accéder au dashboard client → rediriger vers /admin
   if (role === 'admin' && isProtectedDashboard) {
     url.pathname = '/admin'
     return NextResponse.redirect(url)
   }
 
-  // 5. Client qui tente d'accéder à l'espace admin → rediriger vers /dashboard
+  // 6. Client qui tente d'accéder à l'espace admin → rediriger vers /dashboard
   if (role !== 'admin' && isProtectedAdmin) {
     url.pathname = '/dashboard'
     return NextResponse.redirect(url)

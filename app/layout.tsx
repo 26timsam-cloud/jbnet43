@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Geist } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const geist = Geist({ subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
   title: 'JBNet43 - Services de Nettoyage Professionnel | Yssingeaux',
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${geist.className} antialiased`}>
         {children}
         <Analytics />
       </body>

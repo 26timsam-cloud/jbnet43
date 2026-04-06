@@ -46,14 +46,7 @@ export default function LoginPage() {
       // 3. Rafraîchissement des cookies/session pour le Middleware
       router.refresh()
 
-      // 4. Redirection stricte selon le rôle
-      if (profile?.role === "admin") {
-        console.log("Redirecting to Admin...")
-        router.push("/admin")
-      } else {
-        console.log("Redirecting to Dashboard...")
-        router.push("/dashboard")
-      }
+      router.push(profile?.role === "admin" ? "/admin" : "/dashboard")
     }
   }
 
