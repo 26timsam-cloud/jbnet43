@@ -49,7 +49,7 @@ export function Services() {
           {services.map((service) => (
             <Card
               key={service.title}
-              className={`card-shine group hover:shadow-xl transition-all duration-300 border-border hover:-translate-y-1 animate-fade-up overflow-hidden p-0 ${service.delay}`}
+              className={`group hover:shadow-xl transition-all duration-300 border-border hover:-translate-y-1 animate-fade-up overflow-hidden p-0 ${service.delay}`}
             >
               {/* Image flush top */}
               <div className="relative h-48 w-full overflow-hidden rounded-t-xl">

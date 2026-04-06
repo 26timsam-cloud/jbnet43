@@ -49,9 +49,9 @@ export function Header() {
         </div>
         
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
-          <a href="tel:+33400000000" className="flex items-center gap-2 text-sm font-medium text-primary">
+          <a href="tel:+33788429319" className="flex items-center gap-2 text-sm font-medium text-primary">
             <Phone className="h-4 w-4" />
-            04 00 00 00 00
+            07 88 42 93 19
           </a>
           <Link href="/auth/login">
             <Button variant="outline" size="sm">
