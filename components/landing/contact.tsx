@@ -57,17 +57,20 @@ export function Contact() {
 
         <div className="mt-12">
           <Card className="overflow-hidden">
-            <div className="aspect-[21/9] w-full bg-muted flex items-center justify-center">
-              <div className="text-center p-8">
-                <MapPin className="mx-auto h-12 w-12 text-primary mb-4" />
-                <p className="text-lg font-medium text-foreground">Zone d&apos;intervention</p>
-                <p className="mt-2 text-muted-foreground">
-                  Yssingeaux et environs - Haute-Loire (43)
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Le Puy-en-Velay, Monistrol-sur-Loire, Sainte-Sigolène, Retournac...
-                </p>
-              </div>
+            <iframe
+              title="Zone d'intervention JBNet43"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=3.8%2C45.0%2C4.3%2C45.4&layer=mapnik&marker=45.1436%2C4.1197"
+              width="100%"
+              height="400"
+              style={{ border: 0, display: "block" }}
+              loading="lazy"
+            />
+            <div className="px-6 py-4 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-muted-foreground border-t">
+              <span className="flex items-center gap-1.5 font-medium text-foreground">
+                <MapPin className="h-4 w-4 text-primary" />
+                Zone d&apos;intervention
+              </span>
+              <span>Yssingeaux · Le Puy-en-Velay · Monistrol-sur-Loire · Sainte-Sigolène · Retournac</span>
             </div>
           </Card>
         </div>

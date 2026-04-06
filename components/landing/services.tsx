@@ -60,8 +60,6 @@ export function Services() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
-                {/* Dégradé bas pour transition douce vers la carte */}
-                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-card to-transparent" />
               </div>
 
               <CardHeader className="pt-5 px-5">
