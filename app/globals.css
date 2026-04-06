@@ -131,26 +131,29 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Montée verticale naturelle */
+/* Montée verticale — courbe naturelle (lente → rapide → lente) */
 @keyframes bubble-rise {
-  0%   { transform: translateY(0px) scale(0.75); opacity: 0; }
-  5%   { opacity: 1; transform: translateY(-18px) scale(1); }
-  20%  { transform: translateY(-88px); }
-  40%  { transform: translateY(-180px); }
-  60%  { transform: translateY(-272px); }
-  80%  { transform: translateY(-358px); opacity: 0.65; }
-  93%  { opacity: 0.25; }
-  100% { transform: translateY(-430px) scale(1.06); opacity: 0; }
+  0%   { transform: translateY(0px) scale(0.65); opacity: 0; }
+  4%   { opacity: 1; transform: translateY(-12px) scale(1.03); }
+  8%   { transform: translateY(-28px) scale(0.99); }
+  22%  { transform: translateY(-105px); }
+  42%  { transform: translateY(-205px); }
+  62%  { transform: translateY(-298px); }
+  80%  { transform: translateY(-372px); opacity: 0.75; }
+  92%  { transform: translateY(-418px); opacity: 0.22; }
+  100% { transform: translateY(-440px) scale(1.08); opacity: 0; }
 }
-/* Dérive horizontale organique — appliquée séparément */
+/* Dérive horizontale organique + légère déformation élastique */
 @keyframes bubble-wobble {
-  0%   { transform: translateX(0px); }
-  18%  { transform: translateX(10px); }
-  36%  { transform: translateX(-7px); }
-  55%  { transform: translateX(13px); }
-  72%  { transform: translateX(-9px); }
-  88%  { transform: translateX(5px); }
-  100% { transform: translateX(0px); }
+  0%   { transform: translateX(0px)  scaleX(1)    scaleY(1); }
+  12%  { transform: translateX(10px) scaleX(1.03) scaleY(0.97); }
+  28%  { transform: translateX(16px) scaleX(1)    scaleY(1); }
+  44%  { transform: translateX(9px)  scaleX(0.97) scaleY(1.03); }
+  54%  { transform: translateX(-4px) scaleX(1)    scaleY(1); }
+  68%  { transform: translateX(-14px)scaleX(1.02) scaleY(0.98); }
+  82%  { transform: translateX(-7px) scaleX(1)    scaleY(1); }
+  92%  { transform: translateX(-2px) scaleX(0.99) scaleY(1.01); }
+  100% { transform: translateX(0px)  scaleX(1)    scaleY(1); }
 }
 
 /* Reflet "vitre propre" — balayage lumineux diagonal */
@@ -196,24 +199,6 @@
 .bubble-riser {
   position: absolute;
   bottom: -20px;
-}
-
-/* ── Bulle savonneuse réaliste — irisée rose/violet/bleu ── */
-.soap-bubble {
-  border-radius: 50%;
-  /* Reflet principal blanc (top-left) + teintes irisées rose/violet/bleu */
-  background:
-    radial-gradient(circle at 30% 24%, oklch(1 0 0 / 0.90) 0%, oklch(1 0 0 / 0.55) 10%, transparent 28%),
-    radial-gradient(circle at 66% 70%, oklch(1 0 0 / 0.38) 0%, transparent 16%),
-    radial-gradient(ellipse at 50% 115%, oklch(0.82 0.14 330 / 0.45) 0%, oklch(0.78 0.12 280 / 0.30) 40%, transparent 65%),
-    radial-gradient(ellipse at 50% -15%, oklch(0.84 0.10 200 / 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, oklch(0.88 0.06 260 / 0.08) 0%, transparent 80%);
-  border: 1px solid oklch(0.86 0.10 310 / 0.55);
-  box-shadow:
-    inset 2px 2px 10px oklch(1 0 0 / 0.55),
-    inset -2px -2px 8px oklch(0.76 0.16 280 / 0.35),
-    inset 0 -5px 10px oklch(0.80 0.14 330 / 0.30),
-    0 4px 16px oklch(0 0 0 / 0.12);
 }
 
 /* ── Reflet vitre sur les cartes (hover) ── */
