@@ -9,13 +9,17 @@ const features = [
   "Satisfaction garantie",
 ]
 
-// Positions fixes pour les étincelles décoratives (évite l'hydration mismatch)
-const sparkles = [
-  { top: "15%", left: "8%",  size: "h-4 w-4", delay: "delay-0",   opacity: "text-primary/25" },
-  { top: "30%", right: "6%", size: "h-3 w-3", delay: "delay-300", opacity: "text-accent/30" },
-  { top: "60%", left: "5%",  size: "h-3 w-3", delay: "delay-500", opacity: "text-primary/20" },
-  { top: "20%", right: "12%",size: "h-5 w-5", delay: "delay-200", opacity: "text-accent/20" },
-  { top: "70%", right: "8%", size: "h-3 w-3", delay: "delay-400", opacity: "text-primary/15" },
+// Bulles savonneuses — tailles, positions et vitesses variées
+const bubbles = [
+  { size: 18, left: "8%",  duration: "5.5s", delay: "0s",   opacity: 0.7 },
+  { size: 11, left: "18%", duration: "4.2s", delay: "1.3s", opacity: 0.5 },
+  { size: 24, left: "30%", duration: "6.8s", delay: "0.5s", opacity: 0.6 },
+  { size: 9,  left: "44%", duration: "3.9s", delay: "2.1s", opacity: 0.5 },
+  { size: 16, left: "57%", duration: "5.1s", delay: "0.8s", opacity: 0.65 },
+  { size: 13, left: "68%", duration: "4.7s", delay: "1.8s", opacity: 0.5 },
+  { size: 20, left: "78%", duration: "6.2s", delay: "0.3s", opacity: 0.6 },
+  { size: 8,  left: "88%", duration: "3.6s", delay: "2.5s", opacity: 0.45 },
+  { size: 14, left: "93%", duration: "5.8s", delay: "1.0s", opacity: 0.55 },
 ]
 
 export function Hero() {
@@ -26,20 +30,22 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
       </div>
 
-      {/* Étincelles flottantes décoratives */}
+      {/* Bulles savonneuses flottantes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        {sparkles.map((s, i) => (
+        {bubbles.map((b, i) => (
           <div
             key={i}
-            className={`absolute animate-float ${s.delay}`}
-            style={{ top: s.top, left: s.left, right: s.right }}
-          >
-            <Sparkles className={`${s.size} ${s.opacity} animate-sparkle-spin ${s.delay}`} />
-          </div>
+            className="soap-bubble"
+            style={{
+              width:  b.size,
+              height: b.size,
+              left:   b.left,
+              animationDuration: b.duration,
+              animationDelay:    b.delay,
+              opacity: b.opacity,
+            }}
+          />
         ))}
-        {/* Bulles légères */}
-        <div className="absolute bottom-12 left-[20%] h-24 w-24 rounded-full bg-primary/5 animate-float delay-200" />
-        <div className="absolute top-16 right-[25%] h-16 w-16 rounded-full bg-accent/5 animate-float delay-500" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
@@ -47,7 +53,7 @@ export function Hero() {
 
           {/* Badge */}
           <div className="animate-fade-up delay-0 mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-            <Sparkles className="h-4 w-4 animate-sparkle-spin" />
+            <Sparkles className="h-4 w-4" />
             Services de nettoyage professionnel
           </div>
 
@@ -66,7 +72,7 @@ export function Hero() {
 
           {/* Badges features */}
           <div className="animate-fade-up delay-300 mt-8 flex flex-wrap justify-center gap-3">
-            {features.map((feature, i) => (
+            {features.map((feature) => (
               <div
                 key={feature}
                 className="flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm text-foreground"

@@ -53,7 +53,7 @@ export function Services() {
             >
               <CardHeader>
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                  <service.icon className="h-6 w-6 group-hover:animate-sparkle-spin" />
+                  <service.icon className="h-6 w-6" />
                 </div>
                 <CardTitle className="text-xl">{service.title}</CardTitle>
                 <CardDescription className="text-muted-foreground">
