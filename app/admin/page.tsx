@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar, FileText, Users, MessageSquare, Plus } from "lucide-react"
 import Link from "next/link"
@@ -11,7 +11,9 @@ export default async function AdminDashboardPage() {
   // 1. Vérification de sécurité pour s'assurer que l'utilisateur est bien ADMIN
   const { data: { user } } = await supabase.auth.getUser()
 
-  const { data: profile } = await supabase
+  // Lecture du profil sans restriction RLS pour garantir la vérification du rôle
+  const serviceClient = createServiceClient()
+  const { data: profile } = await serviceClient
     .from("profiles")
     .select("role")
     .eq("id", user?.id)

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 import { AdminSidebar } from "@/components/admin/sidebar"
 
 export default async function AdminLayout({
@@ -14,7 +14,9 @@ export default async function AdminLayout({
     redirect("/auth/login")
   }
 
-  const { data: profile } = await supabase
+  // Lecture du profil sans restriction RLS pour garantir la vérification du rôle
+  const serviceClient = createServiceClient()
+  const { data: profile } = await serviceClient
     .from("profiles")
     .select("*")
     .eq("id", user.id)

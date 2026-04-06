@@ -1,5 +1,18 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
+
+/**
+ * Service role client — bypasses RLS entirely.
+ * Use only server-side for privileged operations (e.g. role checks).
+ * Never expose SUPABASE_SERVICE_ROLE_KEY to the client.
+ */
+export function createServiceClient() {
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  )
+}
 
 /**
  * Especially important if using Fluid compute: Don't put this client in a

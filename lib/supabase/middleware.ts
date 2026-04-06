@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
@@ -37,8 +38,12 @@ export async function updateSession(request: NextRequest) {
     return supabaseResponse
   }
 
-  // 2. Utilisateur connecté → récupérer le rôle
-  const { data: profile, error: profileError } = await supabase
+  // 2. Utilisateur connecté → récupérer le rôle via le service client (bypass RLS)
+  const serviceClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  )
+  const { data: profile, error: profileError } = await serviceClient
     .from('profiles')
     .select('role')
     .eq('id', user.id)
