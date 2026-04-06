@@ -49,9 +49,9 @@ export function Services() {
           {services.map((service) => (
             <Card
               key={service.title}
-              className={`card-shine group hover:shadow-xl transition-all duration-300 border-border hover:-translate-y-1 animate-fade-up overflow-hidden ${service.delay}`}
+              className={`card-shine group hover:shadow-xl transition-all duration-300 border-border hover:-translate-y-1 animate-fade-up overflow-hidden p-0 ${service.delay}`}
             >
-              {/* Image */}
+              {/* Image flush top */}
               <div className="relative h-48 w-full overflow-hidden rounded-t-xl">
                 <Image
                   src={service.image}
@@ -64,13 +64,13 @@ export function Services() {
                 <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-card to-transparent" />
               </div>
 
-              <CardHeader className="pt-4">
+              <CardHeader className="pt-5 px-5">
                 <CardTitle className="text-xl">{service.title}</CardTitle>
                 <CardDescription className="text-muted-foreground">
                   {service.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-5 pb-5">
                 <ul className="space-y-2">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2 text-sm text-foreground">

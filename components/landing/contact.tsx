@@ -5,12 +5,12 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Adresse",
-    details: ["Yssingeaux", "43200 Haute-Loire"],
+    details: ["13 Avenue du huit mai 1945", "Yssingeaux 43200"],
   },
   {
     icon: Phone,
     title: "Téléphone",
-    details: ["04 00 00 00 00"],
+    details: ["07 88 42 93 19"],
   },
   {
     icon: Mail,

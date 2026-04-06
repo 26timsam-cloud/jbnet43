@@ -1,7 +1,7 @@
 import { Award, Clock, Users, Leaf } from "lucide-react"
 
 const stats = [
-  { name: "Années d'expérience", value: "10+", icon: Clock },
+  { name: "Années d'expérience", value: "4+", icon: Clock },
   { name: "Clients satisfaits", value: "500+", icon: Users },
   { name: "Interventions/an", value: "2000+", icon: Award },
   { name: "Produits écologiques", value: "100%", icon: Leaf },
@@ -18,7 +18,7 @@ export function About() {
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
               Basée à Yssingeaux en Haute-Loire, JBNet43 est une entreprise familiale 
-              spécialisée dans les services de nettoyage professionnel depuis plus de 10 ans.
+              spécialisée dans les services de nettoyage professionnel avec plus de 4 ans d'expérience dans le secteur.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
               Notre équipe qualifiée intervient auprès des entreprises et des particuliers 
