@@ -38,11 +38,16 @@ export async function updateSession(request: NextRequest) {
   }
 
   // 2. Utilisateur connecté → récupérer le rôle
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('role')
     .eq('id', user.id)
     .single()
+
+  if (profileError) {
+    console.error('[Middleware] Profile query error:', profileError)
+  }
+  console.log('[Middleware] user.id:', user.id, '| role:', profile?.role)
 
   const role = profile?.role
 
