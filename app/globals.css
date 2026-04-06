@@ -131,17 +131,26 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Bulle savonneuse réaliste — monte en px pour être vraiment visible */
+/* Montée verticale naturelle */
 @keyframes bubble-rise {
-  0%   { transform: translateY(0px)    translateX(0px); opacity: 0; }
-  6%   { opacity: 1; }
-  80%  { opacity: 0.6; }
-  100% { transform: translateY(-420px) translateX(10px); opacity: 0; }
+  0%   { transform: translateY(0px) scale(0.75); opacity: 0; }
+  5%   { opacity: 1; transform: translateY(-18px) scale(1); }
+  20%  { transform: translateY(-88px); }
+  40%  { transform: translateY(-180px); }
+  60%  { transform: translateY(-272px); }
+  80%  { transform: translateY(-358px); opacity: 0.65; }
+  93%  { opacity: 0.25; }
+  100% { transform: translateY(-430px) scale(1.06); opacity: 0; }
 }
+/* Dérive horizontale organique — appliquée séparément */
 @keyframes bubble-wobble {
-  0%,100% { transform: translateX(0px); }
-  33%      { transform: translateX(6px); }
-  66%      { transform: translateX(-5px); }
+  0%   { transform: translateX(0px); }
+  18%  { transform: translateX(10px); }
+  36%  { transform: translateX(-7px); }
+  55%  { transform: translateX(13px); }
+  72%  { transform: translateX(-9px); }
+  88%  { transform: translateX(5px); }
+  100% { transform: translateX(0px); }
 }
 
 /* Reflet "vitre propre" — balayage lumineux diagonal */
@@ -183,26 +192,28 @@
 .delay-600 { animation-delay: 600ms; }
 .delay-700 { animation-delay: 700ms; }
 
-/* ── Bulle savonneuse ── */
-.soap-bubble {
+/* ── Conteneur de montée (Y seulement) ── */
+.bubble-riser {
   position: absolute;
   bottom: -20px;
+}
+
+/* ── Bulle savonneuse réaliste — irisée rose/violet/bleu ── */
+.soap-bubble {
   border-radius: 50%;
-  /* Aspect translucide irisé — visible sur fond sombre */
-  background: radial-gradient(
-    circle at 30% 25%,
-    oklch(1 0 0 / 0.70) 0%,
-    oklch(0.88 0.06 255 / 0.30) 30%,
-    oklch(0.80 0.10 145 / 0.15) 55%,
-    oklch(0.70 0.12 255 / 0.08) 70%,
-    transparent 85%
-  );
-  border: 1.5px solid oklch(1 0 0 / 0.50);
+  /* Reflet principal blanc (top-left) + teintes irisées rose/violet/bleu */
+  background:
+    radial-gradient(circle at 30% 24%, oklch(1 0 0 / 0.90) 0%, oklch(1 0 0 / 0.55) 10%, transparent 28%),
+    radial-gradient(circle at 66% 70%, oklch(1 0 0 / 0.38) 0%, transparent 16%),
+    radial-gradient(ellipse at 50% 115%, oklch(0.82 0.14 330 / 0.45) 0%, oklch(0.78 0.12 280 / 0.30) 40%, transparent 65%),
+    radial-gradient(ellipse at 50% -15%, oklch(0.84 0.10 200 / 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, oklch(0.88 0.06 260 / 0.08) 0%, transparent 80%);
+  border: 1px solid oklch(0.86 0.10 310 / 0.55);
   box-shadow:
-    inset 3px 3px 6px oklch(1 0 0 / 0.45),
-    inset -2px -2px 4px oklch(0.75 0.12 255 / 0.20),
-    0 0 8px oklch(1 0 0 / 0.08);
-  animation: bubble-rise ease-in-out infinite;
+    inset 2px 2px 10px oklch(1 0 0 / 0.55),
+    inset -2px -2px 8px oklch(0.76 0.16 280 / 0.35),
+    inset 0 -5px 10px oklch(0.80 0.14 330 / 0.30),
+    0 4px 16px oklch(0 0 0 / 0.12);
 }
 
 /* ── Reflet vitre sur les cartes (hover) ── */

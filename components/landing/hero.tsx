@@ -9,20 +9,20 @@ const features = [
   "Satisfaction garantie",
 ]
 
-// Bulles savonneuses — tailles et positions variées pour remplir tout le fond
+// Bulles savonneuses — tailles, positions et rythmes variés
 const bubbles = [
-  { size: 42, left: "5%",  duration: "7.2s", delay: "0s",   opacity: 0.55 },
-  { size: 18, left: "12%", duration: "5.1s", delay: "1.4s", opacity: 0.40 },
-  { size: 65, left: "20%", duration: "9.5s", delay: "0.3s", opacity: 0.45 },
-  { size: 28, left: "32%", duration: "6.3s", delay: "2.7s", opacity: 0.50 },
-  { size: 14, left: "41%", duration: "4.8s", delay: "0.9s", opacity: 0.35 },
-  { size: 55, left: "50%", duration: "8.4s", delay: "1.8s", opacity: 0.40 },
-  { size: 22, left: "60%", duration: "5.9s", delay: "0.5s", opacity: 0.45 },
-  { size: 78, left: "68%", duration: "11s",  delay: "3.1s", opacity: 0.30 },
-  { size: 35, left: "76%", duration: "7.7s", delay: "1.2s", opacity: 0.50 },
-  { size: 16, left: "83%", duration: "4.5s", delay: "0s",   opacity: 0.40 },
-  { size: 48, left: "90%", duration: "8.1s", delay: "2.0s", opacity: 0.45 },
-  { size: 12, left: "96%", duration: "4.2s", delay: "1.6s", opacity: 0.35 },
+  { size: 44,  left: "4%",  riseDuration: "7.5s",  wobbleDuration: "2.8s", delay: "0s",   opacity: 0.80 },
+  { size: 20,  left: "11%", riseDuration: "5.2s",  wobbleDuration: "2.0s", delay: "1.5s", opacity: 0.70 },
+  { size: 68,  left: "19%", riseDuration: "10.0s", wobbleDuration: "3.5s", delay: "0.4s", opacity: 0.65 },
+  { size: 30,  left: "28%", riseDuration: "6.6s",  wobbleDuration: "2.4s", delay: "2.8s", opacity: 0.75 },
+  { size: 16,  left: "38%", riseDuration: "4.9s",  wobbleDuration: "1.8s", delay: "1.0s", opacity: 0.65 },
+  { size: 56,  left: "47%", riseDuration: "8.8s",  wobbleDuration: "3.1s", delay: "1.9s", opacity: 0.60 },
+  { size: 24,  left: "57%", riseDuration: "6.0s",  wobbleDuration: "2.2s", delay: "0.6s", opacity: 0.70 },
+  { size: 80,  left: "66%", riseDuration: "11.5s", wobbleDuration: "4.0s", delay: "3.2s", opacity: 0.55 },
+  { size: 38,  left: "74%", riseDuration: "8.0s",  wobbleDuration: "2.9s", delay: "1.3s", opacity: 0.75 },
+  { size: 18,  left: "82%", riseDuration: "4.7s",  wobbleDuration: "1.9s", delay: "0.2s", opacity: 0.65 },
+  { size: 50,  left: "89%", riseDuration: "8.5s",  wobbleDuration: "3.3s", delay: "2.1s", opacity: 0.60 },
+  { size: 13,  left: "95%", riseDuration: "4.3s",  wobbleDuration: "1.6s", delay: "1.7s", opacity: 0.65 },
 ]
 
 export function Hero() {
@@ -43,21 +43,27 @@ export function Hero() {
         style={{ background: "radial-gradient(circle, oklch(0.55 0.18 145 / 0.15) 0%, transparent 70%)" }}
       />
 
-      {/* Bulles savonneuses */}
+      {/* Bulles savonneuses — riser (Y) + bubble (X wobble) séparés */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {bubbles.map((b, i) => (
           <div
             key={i}
-            className="soap-bubble"
+            className="bubble-riser"
             style={{
-              width:  b.size,
-              height: b.size,
-              left:   b.left,
-              animationDuration: b.duration,
-              animationDelay:    b.delay,
-              opacity: b.opacity,
+              left: b.left,
+              animation: `bubble-rise ${b.riseDuration} ease-in-out ${b.delay} infinite`,
             }}
-          />
+          >
+            <div
+              className="soap-bubble"
+              style={{
+                width:  b.size,
+                height: b.size,
+                opacity: b.opacity,
+                animation: `bubble-wobble ${b.wobbleDuration} ease-in-out ${b.delay} infinite`,
+              }}
+            />
+          </div>
         ))}
       </div>
 
