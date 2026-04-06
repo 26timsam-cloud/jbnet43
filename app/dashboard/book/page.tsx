@@ -82,7 +82,8 @@ export default function BookingPage() {
     setIsLoading(false)
 
     if (insertError) {
-      setError("Une erreur est survenue. Veuillez réessayer.")
+      console.error("Insert error:", insertError)
+      setError(`Erreur: ${insertError.message}`)
       return
     }
 
