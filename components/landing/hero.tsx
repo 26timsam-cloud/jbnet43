@@ -24,87 +24,85 @@ const bubbles = [
   { size: 14,  left: "95%", riseDuration: "4.4s",  wobbleDuration: "1.7s", delay: "1.7s", opacity: 0.68 },
 ]
 
-/* SVG bulle réaliste avec dégradés radiaux précis — unique gradient IDs par bulle */
+/* SVG bulle savonneuse — effet verre transparent, iridescence subtile */
 function BubbleSVG({ uid }: { uid: number }) {
   const p = `bbl${uid}`
   return (
-    <svg
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ display: "block", width: "100%", height: "100%" }}
-    >
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+      style={{ display: "block", width: "100%", height: "100%" }}>
       <defs>
-        {/* Corps quasi-transparent avec très légère teinte bleue */}
+        {/* Corps ultra-transparent */}
         <radialGradient id={`${p}-body`} cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="rgb(230,240,255)" stopOpacity="0.04" />
-          <stop offset="75%"  stopColor="rgb(210,225,255)" stopOpacity="0.06" />
-          <stop offset="100%" stopColor="rgb(190,210,255)" stopOpacity="0.10" />
+          <stop offset="0%"   stopColor="rgb(220,235,255)" stopOpacity="0.02" />
+          <stop offset="70%"  stopColor="rgb(200,220,255)" stopOpacity="0.04" />
+          <stop offset="100%" stopColor="rgb(180,205,255)" stopOpacity="0.08" />
         </radialGradient>
 
-        {/* Grand reflet blanc principal — haut gauche */}
-        <radialGradient id={`${p}-hl1`} cx="31%" cy="26%" r="33%">
-          <stop offset="0%"   stopColor="white" stopOpacity="0.96" />
-          <stop offset="30%"  stopColor="white" stopOpacity="0.75" />
-          <stop offset="60%"  stopColor="white" stopOpacity="0.25" />
+        {/* Grand reflet blanc — haut gauche, très lumineux */}
+        <radialGradient id={`${p}-hl1`} cx="30%" cy="24%" r="36%">
+          <stop offset="0%"   stopColor="white" stopOpacity="0.98" />
+          <stop offset="25%"  stopColor="white" stopOpacity="0.82" />
+          <stop offset="55%"  stopColor="white" stopOpacity="0.30" />
+          <stop offset="85%"  stopColor="white" stopOpacity="0.05" />
           <stop offset="100%" stopColor="white" stopOpacity="0" />
         </radialGradient>
 
-        {/* Reflet secondaire — bas droite */}
-        <radialGradient id={`${p}-hl2`} cx="67%" cy="70%" r="16%">
-          <stop offset="0%"   stopColor="white" stopOpacity="0.58" />
-          <stop offset="50%"  stopColor="white" stopOpacity="0.20" />
+        {/* Petit reflet secondaire — bas droite */}
+        <radialGradient id={`${p}-hl2`} cx="68%" cy="72%" r="14%">
+          <stop offset="0%"   stopColor="white" stopOpacity="0.70" />
+          <stop offset="45%"  stopColor="white" stopOpacity="0.28" />
           <stop offset="100%" stopColor="white" stopOpacity="0" />
         </radialGradient>
 
-        {/* Iridescence rose/rose-vif — haut droite */}
-        <radialGradient id={`${p}-pink`} cx="78%" cy="20%" r="50%">
-          <stop offset="0%"   stopColor="rgb(255,148,200)" stopOpacity="0.58" />
-          <stop offset="50%"  stopColor="rgb(255,175,218)" stopOpacity="0.25" />
+        {/* Reflet arc en ciel — bas centre (film de savon) */}
+        <radialGradient id={`${p}-rainbow`} cx="50%" cy="96%" r="42%">
+          <stop offset="0%"  stopColor="rgb(255,120,180)" stopOpacity="0.30" />
+          <stop offset="33%" stopColor="rgb(130,210,255)" stopOpacity="0.22" />
+          <stop offset="66%" stopColor="rgb(180,255,180)" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="transparent"     stopOpacity="0" />
+        </radialGradient>
+
+        {/* Iridescence rose — bord haut-droite */}
+        <radialGradient id={`${p}-pink`} cx="80%" cy="18%" r="46%">
+          <stop offset="0%"   stopColor="rgb(255,140,195)" stopOpacity="0.42" />
+          <stop offset="55%"  stopColor="rgb(255,170,215)" stopOpacity="0.14" />
           <stop offset="100%" stopColor="transparent"       stopOpacity="0" />
         </radialGradient>
 
-        {/* Iridescence violette — gauche */}
-        <radialGradient id={`${p}-purple`} cx="13%" cy="50%" r="44%">
-          <stop offset="0%"   stopColor="rgb(195,145,255)" stopOpacity="0.52" />
-          <stop offset="50%"  stopColor="rgb(212,168,255)" stopOpacity="0.20" />
+        {/* Iridescence violette — bord gauche */}
+        <radialGradient id={`${p}-purple`} cx="10%" cy="52%" r="42%">
+          <stop offset="0%"   stopColor="rgb(185,135,255)" stopOpacity="0.38" />
+          <stop offset="55%"  stopColor="rgb(205,160,255)" stopOpacity="0.12" />
           <stop offset="100%" stopColor="transparent"       stopOpacity="0" />
         </radialGradient>
 
-        {/* Iridescence cyan/bleu-vert — bas */}
-        <radialGradient id={`${p}-cyan`} cx="50%" cy="94%" r="50%">
-          <stop offset="0%"   stopColor="rgb(100,215,255)" stopOpacity="0.50" />
-          <stop offset="40%"  stopColor="rgb(140,255,210)" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="transparent"       stopOpacity="0" />
-        </radialGradient>
-
-        {/* Bordure irisée linéaire rose → violet → cyan */}
-        <linearGradient id={`${p}-rim`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%"   stopColor="rgb(255,168,215)" stopOpacity="0.80" />
-          <stop offset="35%"  stopColor="rgb(195,145,255)" stopOpacity="0.68" />
-          <stop offset="65%"  stopColor="rgb(108,192,255)" stopOpacity="0.62" />
-          <stop offset="100%" stopColor="rgb(138,255,200)" stopOpacity="0.48" />
+        {/* Bordure irisée fine — rose→violet→cyan→vert */}
+        <linearGradient id={`${p}-rim`} x1="15%" y1="0%" x2="85%" y2="100%">
+          <stop offset="0%"   stopColor="rgb(255,160,210)" stopOpacity="0.70" />
+          <stop offset="30%"  stopColor="rgb(185,135,255)" stopOpacity="0.60" />
+          <stop offset="65%"  stopColor="rgb(100,190,255)" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="rgb(130,255,195)" stopOpacity="0.40" />
         </linearGradient>
 
         <clipPath id={`${p}-clip`}>
-          <circle cx="50" cy="50" r="48.5" />
+          <circle cx="50" cy="50" r="48.2" />
         </clipPath>
       </defs>
 
-      {/* Corps principal avec bordure irisée */}
-      <circle
-        cx="50" cy="50" r="48.5"
+      {/* Corps transparent + bordure irisée */}
+      <circle cx="50" cy="50" r="48.2"
         fill={`url(#${p}-body)`}
         stroke={`url(#${p}-rim)`}
-        strokeWidth="1.8"
-      />
+        strokeWidth="1.4" />
 
-      {/* Couches irisées + reflets à l'intérieur */}
+      {/* Couches internes */}
       <g clipPath={`url(#${p}-clip)`}>
-        <circle cx="50" cy="50" r="48.5" fill={`url(#${p}-pink)`} />
-        <circle cx="50" cy="50" r="48.5" fill={`url(#${p}-purple)`} />
-        <circle cx="50" cy="50" r="48.5" fill={`url(#${p}-cyan)`} />
-        <circle cx="50" cy="50" r="48.5" fill={`url(#${p}-hl1)`} />
-        <circle cx="50" cy="50" r="48.5" fill={`url(#${p}-hl2)`} />
+        <circle cx="50" cy="50" r="48.2" fill={`url(#${p}-pink)`} />
+        <circle cx="50" cy="50" r="48.2" fill={`url(#${p}-purple)`} />
+        <circle cx="50" cy="50" r="48.2" fill={`url(#${p}-rainbow)`} />
+        {/* Reflets */}
+        <circle cx="50" cy="50" r="48.2" fill={`url(#${p}-hl1)`} />
+        <circle cx="50" cy="50" r="48.2" fill={`url(#${p}-hl2)`} />
       </g>
     </svg>
   )
@@ -135,7 +133,7 @@ export function Hero() {
             className="bubble-riser"
             style={{
               left: b.left,
-              animation: `bubble-rise ${b.riseDuration} cubic-bezier(0.45,0,0.55,1) ${b.delay} infinite`,
+              animation: `bubble-rise ${b.riseDuration} ease-in-out ${b.delay} infinite`,
             }}
           >
             <div

@@ -131,29 +131,32 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Montée verticale — courbe naturelle (lente → rapide → lente) */
+/* Montée verticale — naissance lente, accélération, disparition douce */
 @keyframes bubble-rise {
-  0%   { transform: translateY(0px) scale(0.65); opacity: 0; }
-  4%   { opacity: 1; transform: translateY(-12px) scale(1.03); }
-  8%   { transform: translateY(-28px) scale(0.99); }
-  22%  { transform: translateY(-105px); }
-  42%  { transform: translateY(-205px); }
-  62%  { transform: translateY(-298px); }
-  80%  { transform: translateY(-372px); opacity: 0.75; }
-  92%  { transform: translateY(-418px); opacity: 0.22; }
-  100% { transform: translateY(-440px) scale(1.08); opacity: 0; }
+  0%   { transform: translateY(0px)    scaleX(1)    scaleY(0.6);  opacity: 0; }
+  3%   { transform: translateY(-8px)   scaleX(0.92) scaleY(1.08); opacity: 0.9; } /* pop élastique */
+  6%   { transform: translateY(-22px)  scaleX(1.04) scaleY(0.96); opacity: 1; }   /* rebond */
+  12%  { transform: translateY(-55px)  scaleX(1)    scaleY(1); }
+  28%  { transform: translateY(-140px) scaleX(1.01) scaleY(0.99); } /* légère compression en montant */
+  48%  { transform: translateY(-235px) scaleX(1)    scaleY(1); }
+  66%  { transform: translateY(-315px) scaleX(1.01) scaleY(0.99); }
+  82%  { transform: translateY(-385px) scaleX(1)    scaleY(1);    opacity: 0.85; }
+  94%  { transform: translateY(-430px) scaleX(1.06) scaleY(0.94); opacity: 0.15; } /* s'étale avant de disparaître */
+  100% { transform: translateY(-448px) scaleX(1.1)  scaleY(0.92); opacity: 0; }
 }
-/* Dérive horizontale organique + légère déformation élastique */
+
+/* Dérive sinusoïdale avec déformation dans le sens du mouvement */
 @keyframes bubble-wobble {
-  0%   { transform: translateX(0px)  scaleX(1)    scaleY(1); }
-  12%  { transform: translateX(10px) scaleX(1.03) scaleY(0.97); }
-  28%  { transform: translateX(16px) scaleX(1)    scaleY(1); }
-  44%  { transform: translateX(9px)  scaleX(0.97) scaleY(1.03); }
-  54%  { transform: translateX(-4px) scaleX(1)    scaleY(1); }
-  68%  { transform: translateX(-14px)scaleX(1.02) scaleY(0.98); }
-  82%  { transform: translateX(-7px) scaleX(1)    scaleY(1); }
-  92%  { transform: translateX(-2px) scaleX(0.99) scaleY(1.01); }
-  100% { transform: translateX(0px)  scaleX(1)    scaleY(1); }
+  0%   { transform: translateX(0px)   scaleX(1)    scaleY(1); }
+  8%   { transform: translateX(5px)   scaleX(1.02) scaleY(0.98); }
+  20%  { transform: translateX(13px)  scaleX(1.05) scaleY(0.95); } /* pic droite — max squish */
+  32%  { transform: translateX(8px)   scaleX(1.02) scaleY(0.98); }
+  44%  { transform: translateX(0px)   scaleX(0.98) scaleY(1.02); } /* centre — étirement vertical */
+  56%  { transform: translateX(-8px)  scaleX(1.02) scaleY(0.98); }
+  68%  { transform: translateX(-13px) scaleX(1.05) scaleY(0.95); } /* pic gauche — max squish */
+  80%  { transform: translateX(-6px)  scaleX(1.02) scaleY(0.98); }
+  90%  { transform: translateX(-1px)  scaleX(0.99) scaleY(1.01); }
+  100% { transform: translateX(0px)   scaleX(1)    scaleY(1); }
 }
 
 /* Reflet "vitre propre" — balayage lumineux diagonal */
