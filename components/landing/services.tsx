@@ -1,32 +1,32 @@
-import { Building2, Home, Layers, Sparkles } from "lucide-react"
+import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 const services = [
   {
     title: "Nettoyage de Bureaux",
     description: "Entretien complet de vos espaces professionnels : sols, surfaces, sanitaires et espaces communs. Service régulier ou ponctuel.",
-    icon: Building2,
+    image: "/net_bureau.jpg",
     features: ["Entretien quotidien ou hebdomadaire", "Désinfection des surfaces", "Gestion des déchets"],
     delay: "delay-0",
   },
   {
     title: "Nettoyage de Vitres",
     description: "Nettoyage professionnel de toutes vos surfaces vitrées, intérieures et extérieures, avec équipement adapté.",
-    icon: Sparkles,
+    image: "/net_vitre.jpg",
     features: ["Vitres intérieures et extérieures", "Vérandas et baies vitrées", "Hauteur accessible"],
     delay: "delay-100",
   },
   {
     title: "Ménage Résidentiel",
     description: "Service de ménage complet pour particuliers. Grand ménage de printemps ou entretien régulier de votre domicile.",
-    icon: Home,
+    image: "/net_home.jpg",
     features: ["Ménage complet", "Grand nettoyage ponctuel", "Repassage sur demande"],
     delay: "delay-200",
   },
   {
     title: "Fin de Chantier",
     description: "Nettoyage approfondi après travaux de construction ou rénovation. Remise en état complète des locaux.",
-    icon: Layers,
+    image: "/net_chant.jpg",
     features: ["Débarras des déchets", "Nettoyage poussière fine", "Sols et surfaces"],
     delay: "delay-300",
   },
@@ -49,12 +49,20 @@ export function Services() {
           {services.map((service) => (
             <Card
               key={service.title}
-              className={`card-shine group hover:shadow-xl transition-all duration-300 border-border hover:-translate-y-1 animate-fade-up ${service.delay}`}
+              className={`card-shine group hover:shadow-xl transition-all duration-300 border-border hover:-translate-y-1 animate-fade-up overflow-hidden ${service.delay}`}
             >
+              {/* Image */}
+              <div className="relative h-44 w-full overflow-hidden">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+
               <CardHeader>
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                  <service.icon className="h-6 w-6" />
-                </div>
                 <CardTitle className="text-xl">{service.title}</CardTitle>
                 <CardDescription className="text-muted-foreground">
                   {service.description}
