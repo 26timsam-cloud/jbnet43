@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { createClient } from "@/lib/supabase/client"
+import { Sparkles } from "lucide-react"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -51,7 +52,22 @@ export default function LoginPage() {
   }
 
   return (
-    <Card className="w-full shadow-lg">
+    <>
+      {/* Overlay de chargement */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/80 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-4">
+            <div className="relative h-14 w-14">
+              <div className="absolute inset-0 rounded-full border-4 border-primary/20" />
+              <div className="absolute inset-0 rounded-full border-4 border-primary border-t-transparent animate-spin" />
+              <Sparkles className="absolute inset-0 m-auto h-5 w-5 text-primary animate-sparkle-spin" />
+            </div>
+            <p className="text-sm font-medium text-muted-foreground">Connexion en cours…</p>
+          </div>
+        </div>
+      )}
+
+    <Card className="w-full shadow-lg animate-fade-up delay-0">
       <CardHeader className="space-y-1 text-center">
         <CardTitle className="text-2xl">Connexion</CardTitle>
         <CardDescription>
@@ -106,5 +122,6 @@ export default function LoginPage() {
           </div>
         </CardContent>
     </Card>
+    </>
   )
 }
