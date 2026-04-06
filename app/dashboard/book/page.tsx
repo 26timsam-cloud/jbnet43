@@ -35,11 +35,12 @@ export default function BookingPage() {
   useEffect(() => {
     async function fetchServices() {
       const supabase = createClient()
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("services")
-        .select("*")
+        .select("id, name, description, price_per_hour, category")
         .eq("is_active", true)
-        .order("category")
+        .order("name")
+      if (error) console.error("Services fetch error:", error)
       if (data) setServices(data)
     }
     fetchServices()
