@@ -3,7 +3,6 @@ import { Hero } from "@/components/landing/hero"
 import { Services } from "@/components/landing/services"
 import { HowItWorks } from "@/components/landing/how-it-works"
 import { About } from "@/components/landing/about"
-import { Testimonials } from "@/components/landing/testimonials"
 import { QuoteForm } from "@/components/landing/quote-form"
 import { CtaBanner } from "@/components/landing/cta-banner"
 import { Contact } from "@/components/landing/contact"
@@ -18,8 +17,7 @@ export default function LandingPage() {
         <Services />
         <HowItWorks />
         <About />
-        <Testimonials />
-        <QuoteForm />
+<QuoteForm />
         <CtaBanner />
         <Contact />
       </main>
