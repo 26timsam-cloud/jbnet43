@@ -23,50 +23,80 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="py-20 lg:py-28 bg-background">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
+    <section
+      className="py-24 lg:py-32 relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, oklch(0.20 0.12 255) 0%, oklch(0.26 0.10 260) 50%, oklch(0.18 0.08 265) 100%)" }}
+    >
+      {/* Glow spots */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, oklch(0.55 0.18 145 / 0.08) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-0 left-1/3 w-72 h-72 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, oklch(0.45 0.16 255 / 0.10) 0%, transparent 70%)" }} />
 
-        <div className="text-center mb-16">
-          <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: "oklch(0.55 0.18 145)" }}>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
+
+        <div className="text-center mb-20">
+          <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: "oklch(0.72 0.18 145)" }}>
             Simple &amp; efficace
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-4xl font-black tracking-tight sm:text-5xl" style={{ color: "oklch(0.98 0 0)" }}>
             Comment ça marche ?
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-            En 3 étapes, votre espace est propre et vous avez l'esprit tranquille.
+          <p className="mt-5 text-lg max-w-xl mx-auto" style={{ color: "oklch(0.80 0.03 255)" }}>
+            En 3 étapes, votre espace est propre et vous avez l&apos;esprit tranquille.
           </p>
         </div>
 
-        <div className="relative">
-          {/* Ligne de connexion (desktop) */}
-          <div className="hidden lg:block absolute top-16 left-[calc(16.6%+2rem)] right-[calc(16.6%+2rem)] h-px" style={{ background: "linear-gradient(to right, transparent, oklch(0.88 0.01 255), oklch(0.88 0.01 255), transparent)" }} />
+        <div className="grid gap-6 lg:grid-cols-3 relative">
+          {/* Connector line desktop */}
+          <div
+            className="hidden lg:block absolute top-12 left-[calc(16.6%+3rem)] right-[calc(16.6%+3rem)] h-px"
+            style={{ background: "linear-gradient(to right, transparent, oklch(1 0 0 / 0.12), oklch(1 0 0 / 0.12), transparent)" }}
+          />
 
-          <div className="grid gap-10 lg:grid-cols-3">
-            {steps.map((step, i) => (
-              <div key={step.number} className="flex flex-col items-center text-center group" style={{ animationDelay: `${i * 150}ms` }}>
-                {/* Icône */}
-                <div className="relative mb-6">
-                  <div
-                    className="h-16 w-16 rounded-2xl flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:-translate-y-1"
-                    style={{ background: "linear-gradient(135deg, oklch(0.35 0.12 255) 0%, oklch(0.28 0.10 260) 100%)" }}
-                  >
-                    <step.icon className="h-7 w-7 text-white" />
-                  </div>
-                  {/* Numéro */}
-                  <span
-                    className="absolute -top-3 -right-3 h-6 w-6 rounded-full text-xs font-bold flex items-center justify-center"
-                    style={{ background: "oklch(0.55 0.18 145)", color: "white" }}
-                  >
-                    {i + 1}
-                  </span>
-                </div>
+          {steps.map((step, i) => (
+            <div
+              key={step.number}
+              className="relative rounded-3xl p-8 text-center group transition-transform duration-300 hover:-translate-y-1"
+              style={{
+                background: "oklch(1 0 0 / 0.05)",
+                border: "1px solid oklch(1 0 0 / 0.10)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              {/* Large faded number */}
+              <span
+                className="absolute -top-3 left-1/2 -translate-x-1/2 text-7xl font-black pointer-events-none select-none leading-none"
+                style={{ color: "oklch(1 0 0 / 0.04)" }}
+              >
+                {step.number}
+              </span>
 
-                <h3 className="text-xl font-bold text-foreground mb-3">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+              {/* Icon */}
+              <div
+                className="relative mx-auto mb-6 h-16 w-16 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: "linear-gradient(135deg, oklch(0.55 0.18 145 / 0.25) 0%, oklch(0.35 0.12 255 / 0.25) 100%)",
+                  border: "1px solid oklch(0.55 0.18 145 / 0.30)",
+                }}
+              >
+                <step.icon className="h-7 w-7" style={{ color: "oklch(0.75 0.18 145)" }} />
+                <span
+                  className="absolute -top-2.5 -right-2.5 h-6 w-6 rounded-full text-xs font-black flex items-center justify-center text-white"
+                  style={{ background: "oklch(0.55 0.18 145)" }}
+                >
+                  {i + 1}
+                </span>
               </div>
-            ))}
-          </div>
+
+              <h3 className="text-xl font-bold mb-3" style={{ color: "oklch(0.98 0 0)" }}>
+                {step.title}
+              </h3>
+              <p className="leading-relaxed text-sm" style={{ color: "oklch(0.78 0.03 255)" }}>
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
