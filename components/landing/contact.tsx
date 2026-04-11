@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react"
+import { Reveal } from "@/components/ui/reveal"
 
 const contactInfo = [
   {
@@ -37,7 +38,7 @@ export function Contact() {
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: "oklch(0.55 0.18 145)" }}>
             Parlons-en
           </p>
@@ -47,9 +48,10 @@ export function Contact() {
           <p className="mt-5 text-lg text-muted-foreground">
             Une question ? N&apos;hésitez pas à nous joindre.
           </p>
-        </div>
+        </Reveal>
 
         {/* Info cards */}
+        <Reveal>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-12">
           {contactInfo.map((item) => {
             const inner = (
@@ -91,8 +93,10 @@ export function Contact() {
             )
           })}
         </div>
+        </Reveal>
 
         {/* Map */}
+        <Reveal delay={150}>
         <div
           className="rounded-3xl overflow-hidden"
           style={{
@@ -121,6 +125,7 @@ export function Contact() {
             </span>
           </div>
         </div>
+        </Reveal>
 
       </div>
     </section>

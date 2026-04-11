@@ -164,7 +164,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto max-w-3xl px-4 lg:px-8 text-center">
 
         {/* Badge */}
-        <div className="animate-fade-up delay-0 mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium" style={{ background: "oklch(1 0 0 / 0.10)", color: "oklch(0.90 0.02 255)", border: "1px solid oklch(1 0 0 / 0.18)" }}>
+        <div className="animate-fade-up delay-0 mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium animate-float" style={{ background: "oklch(1 0 0 / 0.10)", color: "oklch(0.90 0.02 255)", border: "1px solid oklch(1 0 0 / 0.18)" }}>
           <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
           Services de nettoyage professionnel — Haute-Loire
         </div>

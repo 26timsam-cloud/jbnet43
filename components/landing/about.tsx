@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Award, Clock, Users, Leaf, ShieldCheck } from "lucide-react"
+import { Reveal } from "@/components/ui/reveal"
 
 const stats = [
   { name: "Années d'expérience", value: 4,    suffix: "+", icon: Clock,  color: "oklch(0.35 0.12 255)" },
@@ -52,7 +53,7 @@ export function About() {
         <div className="grid gap-16 lg:grid-cols-2 items-center">
 
           {/* Texte */}
-          <div>
+          <Reveal direction="left">
             <p className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "oklch(0.55 0.18 145)" }}>
               Notre histoire
             </p>
@@ -98,9 +99,10 @@ export function About() {
                 </span>
               ))}
             </div>
-          </div>
+          </Reveal>
 
           {/* Stats */}
+          <Reveal direction="right">
           <div className="grid grid-cols-2 gap-5">
             {stats.map((stat) => (
               <div
@@ -125,6 +127,7 @@ export function About() {
               </div>
             ))}
           </div>
+          </Reveal>
 
         </div>
       </div>

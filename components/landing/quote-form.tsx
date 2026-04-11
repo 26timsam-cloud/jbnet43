@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Reveal } from "@/components/ui/reveal"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -93,7 +94,7 @@ export function QuoteForm() {
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <Reveal className="text-center mb-16">
           <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: "oklch(0.55 0.18 145)" }}>
             Gratuit &amp; sans engagement
           </p>
@@ -103,8 +104,9 @@ export function QuoteForm() {
           <p className="mt-5 text-lg text-muted-foreground">
             Remplissez le formulaire et recevez votre devis sous 24h.
           </p>
-        </div>
+        </Reveal>
 
+        <Reveal delay={100}>
         <div className="grid lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
 
           {/* Left panel */}
@@ -239,6 +241,7 @@ export function QuoteForm() {
             </form>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   )
