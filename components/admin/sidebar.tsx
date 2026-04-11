@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button"
 import {
   LayoutDashboard,
   Calendar,
+  CalendarDays,
   FileText,
   Users,
   MessageSquare,
-  Settings,
   LogOut,
   Menu,
   X,
@@ -33,6 +33,7 @@ interface AdminSidebarProps {
 
 const navigation = [
   { name: "Tableau de bord", href: "/admin", icon: LayoutDashboard },
+  { name: "Calendrier", href: "/admin/calendar", icon: CalendarDays },
   { name: "Rendez-vous", href: "/admin/appointments", icon: Calendar },
   { name: "Demandes de devis", href: "/admin/quotes", icon: MessageSquare },
   { name: "Clients", href: "/admin/clients", icon: Users },
