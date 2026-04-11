@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Building2, WindowIcon, Home, HardHat, ArrowRight } from "lucide-react"
+import { Building2, AppWindowIcon, Home, HardHat, ArrowRight } from "lucide-react"
 
 const services = [
   {
@@ -16,7 +16,7 @@ const services = [
     title: "Nettoyage de Vitres",
     description: "Nettoyage professionnel de toutes vos surfaces vitrées, intérieures et extérieures.",
     image: "/net_vitre.jpg",
-    icon: WindowIcon,
+    icon: AppWindowIcon,
     tag: "Vitres & Baies",
     features: ["Vitres intérieures et extérieures", "Vérandas et baies vitrées", "Hauteur accessible"],
     color: "oklch(0.45 0.15 210)",
